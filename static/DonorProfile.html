@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor Profile</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href = "static/css/style1.css">
+
+</head>
+<body>
+    <header class ="header">
+        <div class = "container col-md-8 col-md-push-2">
+            <div class = "navbar-header">
+                <button type="button" class ="navbar-toggle" data-toggle ="collapse" data-target ="#micon">
+                    <span class ="icon-bar"></span>
+                    <span class ="icon-bar"></span>
+                    <span class ="icon-bar"></span>
+                </button>
+                <a href="templates/Home.html"><img class="navbar-brand logo " src="static/images/logo.jpg"></a>
+            </div>
+            <div class ="collapse navbar-collapse" id ="micon">
+            <ul class = "nav navbar-nav navbar-right">
+                <li><a href="templates/Home.html" class = "link" id ="link">Home</a></li>
+                <li class = "dropdown">
+                    <a href="#" class = "dropdown-toggle link" id ="link" data-toggle="dropdown">About</a>
+                    <ul class ="dropdown-menu">
+                        <li><a href = "#" class = "meh">Our Donors</a></li>
+                        <li><a href = "#" class = "meh">Our Receivers</a></li>
+                        <li><a href = "#" class = "meh">Our Transporters</a></li>
+                        <li><a href = "#" class = "meh">Hall Of Fame</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class = "link" id ="link">FAQ</a></li>
+                <li><a href="templates/Home.html" class = "link" id ="link">Sign Out</a></li>
+            </ul>
+            </div>
+        </div>
+    </header>
+    <div class = "container-fluid">
+        <div id = "gradient"></div>
+	    <div id = "card"> <br>
+            <img src ="static/images/user.png">
+            <h2>[Name]</h2>
+            <p>Tag: #</p>
+            <p>Role:</p>
+            <p>Company name:</p>
+            <p>Email:</p>
+            <p>Tel:</p>
+            <p>Location Status:</p>
+            <br><br>
+		    <span class ="left bottom"><a href="#">Register your location!</a></span>
+        </div>
+    </div>
+
+    <div class = "container" id = "nani">
+        <ul class ="nav nav-tabs">
+            <li class = "active meow"><a href ="#LR" data-toggle ="tab">Locations Registered</a></li>
+            <li class = "meow"><a href ="#HoD" data-toggle ="tab">History of Donations</a></li>
+        </ul>
+
+        <div class ="tab-content" style = "color:white;">
+            <div class ="tab-pane fade in active" id ="LR">
+                <ul class ="ho">
+                    <li>hey</li>
+                </ul>
+            </div>
+            <div class ="tab-pane fade" id ="HoD">
+                <table style = "width: 100%;">
+                    <tr>
+                        <td>
+                            <p style="width:100%;">No.</p>
+                        </td>
+                        <td>
+                            <p style="width:100%;">Location</p>
+                        </td>
+                        <td>
+                            <p style="width:100%;">Donated Items</p>
+                        </td>
+                        <td>
+                            <p style="width:100%;">Status</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+
+        if email == re.search("[@.]", email) is None:
+            print("Invalid Email!")
+        else:
+            return True
+
+        if len(password) < 8:
+            print("Make sure your password is at lest 8 letters")
+        elif re.search('[0-9]', password) is None:
+            print("Make sure your password has a number in it")
+        elif re.search('[A-Z]', password) is None:
+            print("Make sure your password has a capital letter in it")
+        else:
+            return True
+
+        if len(contact) == 8:
+            return True
+        else:
+            print("Invalid Contact!")
