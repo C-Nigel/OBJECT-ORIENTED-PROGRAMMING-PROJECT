@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor's Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/Donor.css">
+
+
+
+
+</head>
+
+
+
+<body>
+
+<header class = "header">
+        <div class = "container col-md-8 col-md-push-2">
+            <div class = "navbar-header">
+                <button type="button" class ="navbar-toggle" data-toggle ="collapse" data-target ="#micon">
+                    <span class ="icon-bar"></span>
+                    <span class ="icon-bar"></span>
+                    <span class ="icon-bar"></span>
+                </button>
+               <a href = "../static/Home.html"><img class="navbar-brand logo" src="../static/images/logo.jpg"></a>
+            </div>
+            <div class ="collapse navbar-collapse" id ="micon">
+            <ul class = "nav navbar-nav navbar-right">
+                <li><a href="#" class = "link" id ="link">Home</a></li>
+                <li class = "dropdown">
+                    <a href="#" class = "dropdown-toggle link" id ="link" data-toggle="dropdown">About</a>
+                    <ul class ="dropdown-menu">
+                        <li><a href = "#" class = "meh">Our Donors</a></li>
+                        <li><a href = "#" class = "meh">Our Receivers</a></li>
+                        <li><a href = "#" class = "meh">Our Transporters</a></li>
+                        <li><a href = "#" class = "meh">Hall Of Fame</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class = "link" id ="link">FAQ</a></li>
+                <li><a href="#" class = "link" id ="link" data-toggle ="modal" data-target = "#mehmehbox">Sign Out</a></li>
+                <!--<li><a href="#">Register your location!</a></li>-->
+            </ul>
+            </div>
+        </div>
+    </header>
+     <div class ="modal fade" role ="dialog" id ="mehmehbox">
+	    <div class="modal-dialog">
+		    <div class="modal-content">
+		    	<div class="modal-header">
+		    		<button type = "button" class = "close" data-dismiss = "modal">X</button>
+		    	</div>
+ 			    <div class = "modal-body">
+				    <div class ="left-box">
+			            <h1 class = "poop">Sign Out</h1>
+                            <input type = "text" name ="email" placeholder ="Email"/>
+                            <input type = "password" name ="password" placeholder ="Password"/>
+                            <input type = "text" name ="name" placeholder ="Company Name"/>
+                            <input type = "text" name ="number" placeholder ="Contact No."/>
+                                <h4 class = "poop">Desired Role:</h4>
+                                <select>
+                                    <option value="Donor">Donor</option>
+                                    <option value="Receiver">Receiver</option>
+                                    <option value="Transporter">Transporter</option>
+                                </select>
+                                <br><br>
+                             <input type = "submit" name = "signout-button" value = "Sign Out"/>
+		            </div>
+				    <div class = "right-box">
+			            <h1 class = "Line">Login</h1>
+                            <input type = "text" name ="email" placeholder ="Email"/>
+                            <input type = "password" name ="password" placeholder ="Password"/>
+                             <input type = "submit" name = "login-button" value = "Login"/>
+                        <p class = "Line">Forget Password? Click <a href = "#" class = "clicky">Here!</a></p>
+			        </div>
+                    <div class="or">OR</div>
+                </div>
+ 		    </div>
+	    </div>
+    </div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div class="container-fluid">
+
+
+<div class="border">
+<h1 class="h">DONATION LIST</h1>
+<p>Urgent: 5 days before expiry | Medium: 7 days before expiry | Easy: 14 days before expiry</p>
+
+
+
+</div>
+<form action="/action_page.php" methon="POST">
+<fieldset class="define">
+    <h1><u>Item 1:</u></h1>
+     <h3>Item:</h3>
+    <input type="text" name="Item1" class="Item">
+    <br>
+
+    <h3 class="Expiry">Expiry:</h3>
+
+<select>
+    <option value="Choose">Select here</option>
+  <option value="Urgent">Urgent</option>
+  <option value="Medium">Medium</option>
+  <option value="Easy">Easy</option>
+</select>
+
+    <h3 class="Quantity">Quantity:</h3>
+   <select>
+       <option value="Choose">Select here</option>
+  <option value="One">1</option>
+  <option value="Two">2</option>
+  <option value="Three">3</option>
+  <option value="Four">4</option>
+  <option value="Five">5</option>
+  <option value="Six">6</option>
+</select>
+ <h3 class="msg">Special Request:</h3>
+     <textarea class="form-control" rows="5" id="comment"></textarea>
+
+</fieldset>
+
+
+
+ <fieldset class="define">
+     <h1><u>Item 2:</u></h1>
+     <h3>Item:</h3>
+
+    <input type="text" name="Item1" >
+    <br>
+    <h3>Expiry:</h3>
+<select>
+    <option value="Choose">Select here</option>
+  <option value="Urgent">Urgent</option>
+  <option value="Medium">Medium</option>
+  <option value="Easy">Easy</option>
+</select>
+   <h3>Quantity:</h3>
+   <select>
+       <option value="Choose">Select here</option>
+  <option value="One">1</option>
+  <option value="Two">2</option>
+  <option value="Three">3</option>
+  <option value="Four">4</option>
+  <option value="Five">5</option>
+  <option value="Six">6</option>
+</select>
+ <h3>Special Request:</h3>
+     <textarea class="form-control" rows="5" id="comment"></textarea>
+    </fieldset>
+
+        <fieldset class="define">
+            <h1><u>Item 3:</u></h1>
+     <h3>Item:</h3>
+
+    <input type="text" name="Item1" >
+    <br>
+    <h3>Expiry:</h3>
+<select>
+    <option value="Choose">Select here</option>
+  <option value="Urgent">Urgent</option>
+  <option value="Medium">Medium</option>
+  <option value="Easy">Easy</option>
+</select>
+    <h3>Quantity:</h3>
+   <select>
+       <option value="Choose">Select here</option>
+  <option value="One">1</option>
+  <option value="Two">2</option>
+  <option value="Three">3</option>
+  <option value="Four">4</option>
+  <option value="Five">5</option>
+  <option value="Six">6</option>
+</select>
+ <h3>Special Request:</h3>
+     <textarea class="form-control" rows="5" id="comment"></textarea>
+        </fieldset>
+
+            <fieldset class="define">
+                <h1><u>Item 4:</u></h1>
+     <h3>Item:</h3>
+
+    <input type="text" name="Item1" >
+    <br>
+    <h3>Expiry:</h3>
+<select>
+    <option value="Choose">Select here</option>
+  <option value="Urgent">Urgent</option>
+  <option value="Medium">Medium</option>
+  <option value="Easy">Easy</option>
+</select>
+     <h3>Quantity:</h3>
+   <select>
+       <option value="Choose">Select here</option>
+  <option value="One">1</option>
+  <option value="Two">2</option>
+  <option value="Three">3</option>
+  <option value="Four">4</option>
+  <option value="Five">5</option>
+  <option value="Six">6</option>
+</select>
+ <h3>Special Request:</h3>
+     <textarea class="form-control" rows="5" id="comment"></textarea>
+            </fieldset>
+
+
+                <fieldset class="define">
+                    <h1><u>Item 5:</u></h1>
+     <h3 >Item:</h3>
+
+    <input type="text" name="Item1" >
+    <br>
+    <h3>Expiry:</h3>
+<select>
+    <option value="Choose">Select here</option>
+  <option value="Urgent">Urgent</option>
+  <option value="Medium">Medium</option>
+  <option value="Easy">Easy</option>
+</select>
+  <h3>Quantity:</h3>
+   <select>
+       <option value="Choose">Select here</option>
+  <option value="One">1</option>
+  <option value="Two">2</option>
+  <option value="Three">3</option>
+  <option value="Four">4</option>
+  <option value="Five">5</option>
+  <option value="Six">6</option>
+</select>
+ <h3>Special Request:</h3>
+     <textarea class="form-control" rows="5" id="comment"></textarea>
+
+</fieldset>
+
+</form>
+
+<br><br>
+</div>
+</div>
+
+
+<button class="button" type="button"><a href="DonorSubmit.html">Submit</a></button>
+
+
+
+</div>
+</body>
+</html>

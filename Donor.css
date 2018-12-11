@@ -1,0 +1,249 @@
+
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+Body {
+
+
+   background-image: url("images/1bg.jpeg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+	margin:0;
+    padding:0;
+    background-size: 100% 100%;
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+
+
+
+    overflow: auto;
+
+
+}
+
+
+.container {
+    margin-top:8px;
+    border-bottom: 1px solid black;
+}
+.icon-bar {
+    background: darkorange;
+}
+.navbar-toggle .icon-bar{
+    width: 35px;
+    height: 5px;
+}
+.navbar-brand {
+	padding: 0;
+	margin-bottom: 7px;
+	height: 60px;
+}
+.dropdown-menu {
+	background-color: rgba( 255,255,255, 0.8);
+}
+.link {
+    margin-left: 35px;
+	font-size: 23px;
+    color: black;
+}
+#link:hover {
+	background-color: rgba( 255,255,255, 0.8) !important;
+}
+.meh {
+	text-align: center;
+	font-size: 18px;
+}
+ .modal-open .supreme-container{
+    -webkit-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+}
+#mehmehbox {
+	position: absolute;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.6)
+}
+.modal-content {
+    height: 500px;
+	width: 601px;
+}
+.modal body {
+    position:absolute;
+    box-sizing: border-box;
+	padding: 40px;
+}
+.left-box {
+	background-image: url("images/Lsky.jpeg");
+    position: absolute;
+	top:0;
+	left:0;
+	box-sizing: border-box;
+	padding: 40px;
+	width: 300px;
+	height: 450px;
+}
+.poop {
+	color:black;
+}
+h1 {
+	margin: 0 0 20px 0;
+	font-weight: 300;
+	font-size: 28px;
+}
+.clicky {
+    font-size: 18px;
+}
+ .clicky:hover {
+    text-decoration: none;
+    color: #f44336;
+}
+ input[type="text"], input[type="password"], input[type="number"] {
+	display:block;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+	padding: 4px;
+	width: 220px;
+	height: 32px;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #aaa;
+	font-weight: 400;
+	font-size: 15px;
+	transition: 0.2s ease;
+}
+ input[type="submit"] {
+	margin-bottom: 28px;
+	width: 120px;
+	height: 32px;
+	background: #f44336;
+	border: none;
+	border-radius: 2px;
+	color: #fff;
+	font-weight: 500;
+	text-transform: uppercase;
+	transition: 0.2s ease;
+	cursor: pointer;
+}
+ input[type="submit"]:hover, input[type="submit"]:focus {
+	background: #ff5722;
+	transition: 0.2s ease;
+}
+.Line {
+	color: White;
+}
+.right-box {
+	background-image: url("images/Dsky.jpeg");
+	position: absolute;
+	top: 0;
+	right: 0;
+	box-sizing: border-box;
+	padding: 40px;
+	width: 300px;
+	height: 450px;
+}
+.or {
+	position:absolute;
+	top: 180px;
+	left: 280px;
+	width: 40px;
+	height: 40px;
+	background: orangered;
+    color: white;
+	border-radius: 50%;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+	line-height: 40px;
+	text-align: center;
+}
+
+div.heading {
+	text-align: center;
+}
+
+
+
+
+
+
+
+.h { font-size: 50px;
+    margin-top: 200px;
+    text-align: center;}
+
+h1.big { font-size: 45px;
+        text-align: center;}
+
+
+p { font-size: 20px;
+    text-align: center;}
+
+fieldset.define {
+	padding: 30px;
+    margin: 70px;
+    border-radius: 10px;
+    background-color:rgba(255, 255, 255, 0.8);
+    border-style: solid;
+}
+
+.container-fluid{
+    padding: 20px;
+}
+
+
+h4 {
+    text-align: center;
+
+}
+
+
+
+Legend {
+    font-size:25px;
+
+}
+
+input {
+    width: 70mm;
+    font-size:15px;
+}
+
+textarea {
+    width:200mm;
+    font-size: 15px;
+}
+
+select {
+    width:50mm;
+    font-size: 15px;
+
+}
+
+
+
+.button {
+
+    text-align: center;
+display: inline-block;
+    background-color: #FFFFFF;
+    color: white;
+    padding: 12px 20px;
+    margin: 24px 12px;
+    border-radius: 4px;
+    font-size: 20px;}
+
+
+<!-- Donor Submit -->
+
+table,th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+
+}
+
+
+
+<!-- Transporter -->
+
+
+
+

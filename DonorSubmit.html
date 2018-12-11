@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Summary</title>
+    <meta charset="UTF-8">
+    <title>Donor's Page</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="Donor.css">
+    <link rel="stylesheet" type="text/css" href="../static/Donor.css">
 
 
- </head>
+</head>
+
+
 <body>
-       <header class = "header">
+
+
+<header class = "header">
         <div class = "container col-md-8 col-md-push-2">
             <div class = "navbar-header">
                 <button type="button" class ="navbar-toggle" data-toggle ="collapse" data-target ="#micon">
@@ -22,7 +27,7 @@
                     <span class ="icon-bar"></span>
                     <span class ="icon-bar"></span>
                 </button>
-               <a href = "Home.html"><img class="navbar-brand logo" src="/images/logo.jpg"></a>
+               <a href = "../static/Home.html"><img class="navbar-brand logo" src="../static/images/logo.jpg"></a>
             </div>
             <div class ="collapse navbar-collapse" id ="micon">
             <ul class = "nav navbar-nav navbar-right">
@@ -37,7 +42,7 @@
                     </ul>
                 </li>
                 <li><a href="#" class = "link" id ="link">FAQ</a></li>
-                <li><a href="#" class = "link" id ="link" data-toggle ="modal" data-target = "#mehmehbox">Login/SignUp</a></li>
+                <li><a href="#" class = "link" id ="link" data-toggle ="modal" data-target = "#mehmehbox">Sign Out</a></li>
                 <!--<li><a href="#">Register your location!</a></li>-->
             </ul>
             </div>
@@ -81,22 +86,76 @@
 </div>
 </div>
 </div>
-<div class="heading"></div>
+
+
+<div class="container-fluid">
+<fieldset class="define">
+
+    <h1 class="big"><u>Donor's Summary</u></h1>
+
+    <h2> Thank you for donating, here is a summary of your donations.
+        Please double check and proceed to "Submit". </h2>
+
+
+
+<table style="width:100%" border=' 1px solid black'
+    border-collapse = 'collapse'>
+  <tr>
+      <th>No.</th>
+    <th>Item:</th>
+    <th>Expiry:</th>
+    <th>Quantity</th>
+    <th>Special Request:</th>
+  </tr>
+  <tr>
+      <td>1.</td>
+    <td>Canned of Tunas</td>
+    <td>Medium</td>
+    <td>4</td>
+      <td>Store in a cool place</td>
+  </tr>
+  <tr>
+
+      <td>2.</td>
+    <td></td>
+    <td></td>
+    <td></td>
+       <td></td>
+  </tr>
+  <tr>
+
+      <td>3.</td>
+    <td></td>
+    <td></td>
+    <td></td>
+       <td></td>
+  </tr>
+
+    <tr>
+
+      <td>4.</td>
+    <td></td>
+    <td></td>
+    <td></td>
+         <td></td>
+  </tr>
+
+     <tr>
+
+      <td>5.</td>
+    <td></td>
+    <td></td>
+    <td></td>
+         <td></td>
+  </tr>
+</table>
 
 
 
 
+</fieldset>
 
+</div>
 
-
-
-
-
-
-
-
-
-
-
- </body>
+</body>
 </html>

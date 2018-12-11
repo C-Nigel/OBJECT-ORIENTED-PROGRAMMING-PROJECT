@@ -1,66 +1,58 @@
 from flask import *
-from persistence import *
+
+
 
 app = Flask(__name__)
-app.config.from_mapping(
-    SECRET_KEY = 'dev'
-)
+
+
 @app.route('/')
 def Home():
     return render_template('Home.html')
 
-@app.route('/signup', methods=('GET', 'POST'))
-def signup():
-    if request.method == 'POST':
-        email = request.form['email']
-        Cname = request.form['Cname']
-        password = request.form['password']
-        contact = request.form['contact']
 
-        if not email:
-            error = 'Email is Required'
-        elif not Cname:
-            error = 'Company name is required.'
-        elif not password:
-            error = 'Password is required.'
-        elif not contact:
-            error = 'Contact is required.'
-        else:
-            create_user(email, Cname, password, contact)
-            return redirect(url_for('Home'))
-        flash(error)
-    return render_template('Home.html')
+@app.route('/Donor', methods = ('GET','POST'))
+def donor():
+        if request.method == 'POST':
+            item = request.form['item']
+            expiry =request.form['expiry']
+            quantity =request.form['quantity']
+            error = None
+            if not item:
+                error = 'Item is required'
+            elif not expiry:
+                error = 'Expiry is required'
+            elif not quantity:
+                error = 'Quantity is required'
 
-@app.route('/login',  methods=('GET', 'POST'))
-def login():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        if email == re.search("[@.]", email) is None:
-            print("Invalid Email")
-        else:
-            return True
-        error = None
-        if not email:
-            error = 'Email is required.'
-        elif not password:
-            error = 'Password is required.'
-        else:
-            user = get_user(email, password)
-            if user is None:
-                error = 'Wrong email and password'
             else:
-                session['tag'] = user.get_tag()
-                session['email'] = user.get_email()
-                return redirect(url_for('Home'))
-        flash(error)
-    # after login go to the specific profile pages.
-    return render_template('Home.html')
+                donation_list = get_item(item, expiry, quantity)
+                return redirect(url_for('Donor'))
 
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('Home'))
+        return render_template('Donor.html')
+
+
+
+
+@app.route('/Donor')
+def Donor1():
+    # logic
+    return render_template('Donor.html')
+
+@app.route('/DonorSubmit')
+def DonorSubmit2():
+    return render_template('DonorSubmit.html')
+
+
+
+
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run()
