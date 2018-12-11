@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Transporter Profile</title>
+    <link rel = 'stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel = 'stylesheet' type = 'text/css' href = 'transporterHead.css'>
+    <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" type = "text/css" >
+
+    <link rel = "stylesheet" href = "https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" type = "text/css">
+    <link rel = "stylesheet" href = "https://unpkg.com/filepond/dist/filepond.min.css" type = "text/css">
+
+    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+
+</head>
+
+<body>
+<div class="elist_button">
+    <a href="#">
+        <button class = 'elistbtn' style="background-color: rgba(0,0,255,0.2);">View Ongoing E-List</button>
+    </a>
+</div>
+
+    <header class="header">
+        <div class="container col-md-8 col-md-push-2">
+            <div class="navbar-header">
+                <img class="navbar-brand logo" src="project materials/images/newlogo.jpg">
+            </div>
+        <div class="collapse navbar-collapse" id="micon">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" class="link" id="link">Home</a></li>
+                <li><a href="#" class="link" id="link">About </a></li>
+                <li><a href="#" class="link">FAQ</a></li>
+                <li><a href="#" class="link">Contact Us</a></li>
+            </ul>
+        </div>
+        </div>
+    </header>
+<br>
+<!--
+<div class = 'back_btn' >
+    <a href = 'transporterHead.html'>
+        <button class = 'btn' style='background-color: rgba(255,0,0,1);'>up</button>
+    </a>
+</div>
+-->
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+
+<div class="boards">
+
+<div class="board1">
+    <table>
+        <tr>
+            <td>
+                <div class = "w-full sm:w-1/2 md:w-4/5 flex flex-col p-8">
+                    <div class = "bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
+                        <div class = "p-4 flex-1 flex flex-col" style = "width: 200px; margin-right: 570px;">
+
+                            <p class="Profile_pic"><input type="file" class="filepond" name="filepond" accept="image/png, image/jpeg, image/gif"/></p>
+                            <h3 class = "mb-4 text-4xl">Profile Details </h3>
+                            <div class = "mb-4 text-grey-darker text-m flex-1">
+
+                                <p>Username: Leon</p>
+                                <br><p>Tag: #5996</p>
+                                <br><p>Role: Transporter</p>
+                                <br><p>Company: ICarryYou</p>
+                                <br><p>Contact Number: 93459876</p>
+                                <br><p>Email: Leon@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<p id="text" style="display:none">Checked</p>
+<div class="board2">
+    <table>
+        <tr>
+            <td>
+                <div class = "w-full sm:w-1/2 md:w-4/5 flex flex-col p-8">
+                    <div class = "bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
+                        <div class = "p-4 flex-1 flex flex-col" style = "width: 200px; margin-right: 570px;">
+                            <h3 class = "mb-4 text-1xl" style="width: 140%;">Completed Trips</h3>
+                            <div class = "mb-4 text-grey-darker text-sm flex-1">
+
+                                <table class="status" width="590" >
+                                    <tr>
+                                        <th bgcolor="#89cff0">Index</th>
+                                        <th bgcolor="#89cff0">Origin</th>
+                                        <th bgcolor="#89cff0">Destination</th>
+                                        <!--
+                                        <th bgcolor="#89cff0">Status</th>
+                                        -->
+                                        <!--
+                                        <th bgcolor="#89cff0">Deadline</th>
+                                        -->
+                                        <!--
+                                        <th bgcolor="#89cff0">Status</th>
+                                        -->
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#e7f5fe" height="100" width="110">Task 1</td>
+                                        <td bgcolor="#e7f5fe" height="100" width="110">Khatib Blk 845</td>
+                                        <td bgcolor="#e7f5fe" height="100" width="110">NYP Blk L</td>
+                                        <!--
+                                        <td bgcolor="#e7f5fe" height="100" width="170">
+                                        <input type="radio" name="choice" onclick="alert('Completed!')" value="Message"/>Completed<br>
+                                        <input type="radio" name="choice" onclick="alert('In Progress!')" value="Message2"/>In Progress
+                                        </td>
+                                        -->
+                                        <!--
+                                        <td bgcolor="e7f5fe" height="100" width="110">Monday 14:50</td>
+                                        -->
+                                        <!--
+                                        <td bgcolor="e7f5fe" height="100" width="170">
+                                            <div class="start_button">
+                                            <button class="start_btn" style="background-color:lightgreen;">Start</button>
+                                            </div>
+                                        </td>
+                                        -->
+
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#e7f5fe" height="100" width="110">Task 2</td>
+                                        <td bgcolor="#e7f5fe" height="100" width="110">Jurong East</td>
+                                        <td bgcolor="#e7f5fe" height="100" width="110">Yew Tee Blk 321</td>
+                                        <!--
+                                        <td bgcolor="#e7f5fe" height="100" width="170">
+                                        <input type="radio" name="choice2" onclick="alert('Completed!')" value="Message"/>Completed<br>
+                                        <input type="radio" name="choice2" onclick="alert('In Progress!')" value="Message2"/>In Progress
+                                        </td>
+                                        -->
+                                        <!--
+                                        <td bgcolor="e7f5fe" height="100" width="110">Wednesday 15:50</td>
+                                        -->
+                                        <!--
+                                        <td bgcolor="e7f5fe" height="100" width="170">
+                                            <div class="start_button">
+                                            <button class="start_btn" style="background-color:lightgreen;">Start</button>
+                                            </div>
+                                        </td>
+                                        -->
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#e7f5fe" height="100" width="110">Task 3</td>
+                                        <td bgcolor="#e7f5fe" height="100" width="110">Ang Mo Kio</td>
+                                        <td bgcolor="#e7f5fe" height="100" width="110">Khatib Blk 878</td>
+                                        <!--
+                                        <td bgcolor="#e7f5fe" height="100" width="170">
+                                        <input type="radio" name="choice3" onclick="alert('Completed!')" value="Message"/>Completed<br>
+                                        <input type="radio" name="choice3" onclick="alert('In Progress!')" value="Message2"/>In Progress
+                                        </td>
+                                        -->
+                                        <!--
+                                        <td bgcolor="e7f5fe" height="100" width="110">Friday 17:50</td>
+                                        -->
+                                        <!--
+                                        <td bgcolor="e7f5fe" height="100" width="170">
+                                            <div class="start_button">
+                                            <button class="start_btn" style="background-color:lightgreen;">Start</button>
+                                            </div>
+                                        </td>
+                                        -->
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#e7f5fe" height="100" width="110">Task 4</td>
+                                        <td bgcolor="#e7f5fe" height="100" width="110">Toa Payoh</td>
+                                        <td bgcolor="#e7f5fe" height="100" width="110">Orchard 313</td>
+                                        <!--
+                                        <td bgcolor="#e7f5fe" height="100" width="170">
+                                        <input type="radio" name="choice4" onclick="alert('Completed!')" value="Message"/>Completed<br>
+                                        <input type="radio" name="choice4" onclick="alert('In Progress!')" value="Message2"/>In Progress
+                                        </td>
+                                        -->
+                                        <!--
+                                        <td bgcolor="e7f5fe" height="100" width="110">Saturday 13:45</td>
+                                        -->
+                                        <!--
+                                        <td bgcolor="e7f5fe" height="100" width="170">
+                                            <div class="start_button">
+                                            <button class="start_btn" style="background-color:lightgreen;">Start</button>
+                                            </div>
+                                        </td>
+                                        -->
+                                    </tr>
+                                </table>
+
+
+                                <div class="get_task">
+                                    <a href="../templates/choosingarea.html">
+                                    <button class="task_btn" style="background-color: rgba(0,0,255,0.2);">Start New Task</button>
+                                    </a>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</div>
+
+<script>
+FilePond.registerPlugin(
+        FilePondPluginFileEncode,
+        FilePondPluginFileValidateType,
+        FilePondPluginImageExifOrientation,
+        FilePondPluginImagePreview,
+        FilePondPluginImageCrop,
+        FilePondPluginImageResize,
+        FilePondPluginImageTransform
+    );
+
+    FilePond.create(
+        document.querySelector('input'),
+        {
+            labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
+            imagePreviewHeight: 170,
+            imageResizeTargetWidth: 200,
+            imageResizeTargetHeight: 150,
+            stylePanelLayout: 'compact circle',
+            styleLoadIndicatorPosition: 'center bottom',
+            styleButtonRemoveItemPosition: 'center bottom'
+        }
+    );
+</script>
+
+
+</body>
+</html>
