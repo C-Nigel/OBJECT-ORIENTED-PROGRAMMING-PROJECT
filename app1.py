@@ -141,7 +141,7 @@ def abcde():
     return render_template('home.html')
 
 @app.route('/faq')
-def abcdeg():
+def abcdef():
     return render_template('faq.html')
 
 @app.route('/admin')
