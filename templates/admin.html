@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "utf-8">
+	<script src = "admin.js"></script>
+	<style>
+		*{
+			text-align: center;
+		}
+		#navigation{
+			text-align: right;
+		}
+
+		#navigation {
+			margin-top: 50px;
+		}
+	
+		.navi{
+			border: none;
+			color: white;
+			padding: 10px 5px;
+			text-align: center;
+			text-decoration: none;
+			cursor: pointer;
+			float: right;
+
+			margin-right: 40px;
+			opacity: 0.9;
+			transition: 0.3s;
+			font-size: 16px;
+		}
+	
+		.navi:hover {
+			opacity: 1;
+		}
+		
+		.navi:active {
+			box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.8);
+			transform: translateY(4px);
+		}
+		
+		.faq_table_design {
+			width: 100%;
+		}
+		
+		td{
+			text-align:left;
+			padding: 8px;
+			font-size:16px;
+			font-weight: bold;
+			border-collapse: collapse;
+			border-bottom: 2px solid #646464;
+			border-top: 2px solid #646464;
+		}
+		
+		tr:nth-child(odd) {
+			background-color: #e6ffcc;
+		}
+		
+		tr:nth-child(even) {
+			background-color: #ffffcc;
+		}
+		
+		.replied_answers {
+			margin-left: 5%;
+		}
+		
+	</style>
+</head>
+
+<body onload = "DisplayFeedbacks()">
+	<div id="navigation">
+		<a href="home.html">
+			<button class = "navi" style = "background-color:rgba(0,0,255,0.2);">Back to home</button>
+		</a>
+	</div>
+	<div id="feedback_div">
+		<h2><a href="faq.html">Feedback</a></h2>
+		<p>Feedback <input id="tx_feedback" /></p>
+		<br/>
+		<input type="button" value= "save" onclick="saveMe();" />
+		<br/>
+		<input type="button" value= "display" onclick="DisplayFeedbacks();" />
+		<br/>
+		<span id="span_table"></span>
+		<br/>
+		<br/>
+		<br/>
+		<p>Input<input id="tx_index" readonly="readonly" /></p>
+		<br/>
+		response <input id="tx_response" />
+		<br/>
+		<input type="button" value= "response" onclick="saveResponse();" />
+		<br/>
+	</div>
+	<hr>
+	<br>
+	<div id="qn_input">
+		
+	</div>
+
+</body>
+</html>

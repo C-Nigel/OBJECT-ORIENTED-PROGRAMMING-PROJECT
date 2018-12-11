@@ -1,0 +1,588 @@
+
+</html>
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href = "css/style1.css">
+
+</head>
+<body>
+
+<nav class = "navbar navbar-style">
+<header class = "header">
+        <div class = "container col-md-8 col-md-push-2">
+            <div class = "navbar-header">
+                <button type="button" class ="navbar-toggle" data-toggle ="collapse" data-target ="#micon">
+                    <span class ="icon-bar"></span>
+                    <span class ="icon-bar"></span>
+                    <span class ="icon-bar"></span>
+                </button>
+               <a href = "home.html"><img class="navbar-brand logo" src="../../../Documents/legin/static/logo.jpg"></a>
+            </div>
+            <div class ="collapse navbar-collapse" id ="micon">
+            <ul class = "nav navbar-nav navbar-right">
+                <li><a href="home.html" class = "link" id ="link">Home</a></li>
+                <li class = "dropdown">
+                    <a href="#" class = "dropdown-toggle link" id ="link" data-toggle="dropdown">About</a>
+                    <ul class ="dropdown-menu">
+                        <li><a href = "#" class = "meh">Our Donors</a></li>
+                        <li><a href = "#" class = "meh">Our Receivers</a></li>
+                        <li><a href = "#" class = "meh">Our Transporters</a></li>
+                        <li><a href = "#" class = "meh">Hall Of Fame</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class = "link" id ="link">FAQ</a></li>
+                <li><a href="#" class = "link" id ="link" data-toggle ="modal" data-target = "#mehmehbox">Login/SignUp</a></li>
+                <!--<li><a href="#">Register your location!</a></li>-->
+            </ul>
+            </div>
+        </div>
+    </header>
+</nav>
+
+
+<div class = 'content'>
+<br>
+	<h1 class = "headings"> Frequently asked questions</h1>
+	<br>
+	<br>
+	<button class="accordion">What is food waste?</button>
+	<div class="panel">
+	  <br/><p>there are many universal items including but not limited to:
+			<ul>
+				<li>Batteries</li>
+				<li>computer/CPUs/laptops*</li>
+				<li>(Fluorescent) light bulbs</li>
+				<li>Cell phones</li>
+				<li>Printer/copier/scanner/fax</li>
+			</ul>
+		  </p>
+		  <br>
+		  <p><sub>*data should be removed before disposal</sub></p><br/>
+	</div>
+	<br>
+	<button class="accordion">Why should we not waste food?</button>
+	<div class="panel">
+		<br/><p></p><br/>
+	</div>
+	<br>
+	<button class="accordion">What does Food for Life do?</button>
+	<div class="panel">
+		<br/><p></p><br/>
+	</div>
+	<br>
+	<button class="accordion">Why was Food for Life set up?</button>
+	<div class="panel">
+		<br/><p></p><br/>
+	</div>
+	<br>
+	<button class="accordion">What happens to the food waste?</button>
+	<div class="panel">
+		<br/><p></p><br/>
+	</div>
+	<br>
+	<button class="accordion">How is food waste currently managed in Singapore?</button>
+	<div class="panel">
+		<br/><p><br><a href="https://www.nea.gov.sg/our-services/waste-management/3r-programmes-and-resources/e-waste-management" target="_blank">here</a>.</p><br/>
+	</div>
+	<button class="accordion">What</button>
+	<div class="panel">
+		<br/><p>Singapore's NEA has been working closely with many industry partner & communities such as Nanyang Polytechnic to encourage e-waste recycling through voluntary programmes led by industry partners<br>To learn more, visit NEA's webpage by clicking <a href="https://www.nea.gov.sg/our-services/waste-management/3r-programmes-and-resources/e-waste-management" target="_blank">here</a>.</p><br/>
+	</div>
+</div>
+<div class = "content">
+	<div class = "headings">
+		<br>
+		<br>
+		<br>
+		<br>
+		<h1>Have a feedback/question?</h1>
+		<p class="instructions"> click "expand" and post it down below !</p>
+		<br>
+		<button type="button" onclick="textBox()" id ="txtBxBtn">Expand</button>
+		<br>
+		<span id = "text_box"></span>
+		<br>
+		<span id = "submit_button"></span>
+		<br>
+		<h1 id = "faq_header" style = "display:none"> Feedback/Questions Asked</h1>
+		<br>
+	</div>
+	<span id = "user_feedback"></span>
+	<br>
+	<br>
+
+	<button onclick="topFunction()" id="back_to_top_button" title="Go to top">Top</button>
+
+</div>
+<br>
+<script>
+//script for the drop down question
+var acc = document.getElementsByClassName("accordion");
+var i;
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    }
+	else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+
+//back to the top button
+window.onscroll = function() {scrollFunction()};
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("back_to_top_button").style.display = "block";
+    } else {
+        document.getElementById("back_to_top_button").style.display = "none";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
+function textBox() //text area box
+{
+	if (IsVisible==false){ // meaning it is invisible, so we show it
+		document.getElementById('txtbx').style.display = "block";
+		document.getElementById('txtBxBtn').innerHTML = 'collapse';
+		document.getElementById('submitbtn').style.display = "block";
+		IsVisible = true;
+		}
+
+	else  { // we hide it
+		document.getElementById('txtbx').style.display = "none";
+		document.getElementById('txtBxBtn').innerHTML = 'expand';
+		document.getElementById('submitbtn').style.display = "none";
+		IsVisible = false;
+		}
+
+}
+
+var para = ""; // creates the text area and attach it to html codes
+para += "<br>";
+para += "<textarea id = txtbx></textarea>";
+document.getElementById('text_box').innerHTML = para;
+document.getElementById('txtbx').style.display = "none";
+document.getElementById('txtbx').setAttribute("rows", "10");
+document.getElementById('txtbx').setAttribute("cols", "100");
+document.getElementById('txtbx').setAttribute("placeHolder", "Enter your feedback/questions here:");
+document.getElementById('txtBxBtn').innerHTML = 'expand';
+var IsVisible = false;
+console.log("Text Box Loaded Successfully");
+
+var submitbtn = ""; // creates submit button and attach it to html codes
+submitbtn += "<br>";
+submitbtn += "<button id = submitbtn>";
+document.getElementById('submit_button').innerHTML = submitbtn;
+document.getElementById('submitbtn').style.display = "none";
+document.getElementById('submitbtn').setAttribute('type', 'button');
+document.getElementById('submitbtn').setAttribute('onclick', "post()");
+document.getElementById('submitbtn').innerHTML = 'Post';
+console.log("Submit Button Loaded Successfully");
+
+function post()
+{
+	console.log('SaveMe Entry');
+	var feedbackA = JSON.parse(localStorage.getItem('Feedback'));
+	if (feedbackA == null)
+	{
+		feedbackA = [];
+	}
+	var tempO = { Feedback : document.getElementById('txtbx').value, Response : '' };
+	feedbackA.push(tempO);
+	console.log('arraylen='+feedbackA.length);
+	localStorage.setItem('Feedback',JSON.stringify(feedbackA));
+	document.getElementById('txtbx').value = "";
+	DisplayFeedbacks();
+	console.log('SaveMe Exit');
+}
+
+function DisplayFeedbacks()
+{
+	console.log('Loading DisplayFeedbacks');
+	var feedbackA = JSON.parse(localStorage.getItem('Feedback'));
+	if (feedbackA == null)
+	{
+		feedbackA = [];
+	}
+	console.log('arraylen='+feedbackA.length);
+	if (feedbackA.length != 0)
+	{
+		document.getElementById('faq_header').style.display = "block"; // make faq post section header visible
+	}
+	var tempS = "";
+	tempS += "<table border='0' class='faq_table_design'>";
+	for(var i=0 ; i < feedbackA.length; i++)
+	{
+		var item = feedbackA[i];
+		tempS += "<tr><td>";
+		tempS += "<br/><p class='headings'>Feedback/Question:</p>"+"<p class='replied_answers'>"+item.Feedback+"</p>";
+		if (item.Response != "")
+		{
+			tempS += "<br/><p class='headings'>Response:</p>"+"<p class='replied_answers'>"+item.Response+"</p>";
+		}
+		tempS += "<br/>";
+		tempS += "</td></tr>";
+	}
+	tempS += "</table>";
+	console.log("tempS="+tempS);
+	document.getElementById('user_feedback').innerHTML = tempS;
+	console.log('DisplayFeedbacks Loaded Successfully');
+
+}
+
+DisplayFeedbacks();
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+* {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.toppic {
+	position: relative;
+	background:  no-repeat center center fixed;
+	-webkit-background-size:cover;
+	background-size:cover;
+	text-align:center;
+	color: #fff;
+	padding-top: 10px;
+	min-height: 350px;
+	letter-spacing: 2px;
+	font-family: sans-serif;
+}
+.toppic h1 {
+	font-size: 50px;
+	line-height: 1.3;
+}
+.toppic h1 span {
+	font-size: 25px;
+	color : #FFFF00;
+	border-bottom: 2px solid #FFFF00 ;
+	padding-bottom: 12px;
+	line-height: 3;
+}
+
+.subheading {
+	position: absolute ;
+	bottom: 20px ;
+	right: 20px ;
+	background-color : black ;
+	color: white ;
+	padding-left: 20px ;
+	padding-right: 20px ;
+	opacity: 0.8 ;
+}
+
+.content {
+	margin-top: 1%;
+	margin-left: 2%;
+	margin-right: 2%;
+	border:2px solid chocolate;
+	border-radius: 20px;
+	background: rgba(245,245,245,0.5);
+
+}
+
+.headings {
+	margin-left: 1.1%;
+}
+
+.accordion {
+    background-color: #ffffff;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 20px;
+    transition: 0.4s;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bold;
+}
+
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after { /*this is for the plus minus sign*/
+    content: "\2212";
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+	font-size: 18px;
+	font-family: 'Century Gothic', sans-serif;
+}
+
+.instructions {
+	font-size: 16px;
+}
+
+#txtBxBtn, #submitbtn {
+	background-color: chocolate;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	font-size: 16px;
+	margin: 4px 2px;
+	opacity: 0.6;
+	transition: 0.3s;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#txtBxBtn:hover {
+	opacity: 1
+}
+
+#submitbtn:hover {
+	opacity: 1
+}
+
+#back_to_top_button {
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	z-index: 99;
+	font-size: 18px;
+	border: none;
+	outline: none;
+	background-color: chocolate;
+	color: white;
+	cursor: pointer;
+	padding: 15px;
+	border-radius: 4px;
+}
+
+#back_to_top_button:hover {
+	background-color: #555;
+}
+
+
+
+
+#txtbx {
+	resize: none;
+}
+
+.faq_table_design {
+    width: 100%;
+}
+
+td {
+	text-align: left;
+    padding: 8px;
+	font-size: 16px;
+	font-weight:bold;
+	border-collapse: collapse;
+	border-bottom: 2px solid #646464;
+	border-top: 2px solid #646464;
+}
+
+tr:nth-child(odd){
+	background-color: chocolate;
+}
+
+tr:nth-child(even){
+	background-color: chocolate;
+}
+
+.replied_answers {
+	margin-left: 5%;
+}
+
+
+
+</style>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+* {
+    margin:0;
+    padding:0;
+    font-family: 'Montserrat', sans-serif;
+}
+body {
+    background-image: url("../images/pic3.jpeg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.container {
+    margin-top:8px;
+    border-bottom: 1px solid white;
+}
+.icon-bar {
+    background: darkorange;
+}
+.navbar-toggle .icon-bar{
+    width: 35px;
+    height: 5px;
+}
+.navbar-brand {
+	padding: 0;
+	margin-bottom: 7px;
+	height: 60px;
+}
+.dropdown-menu {
+	background-color: rgba( 255,255,255, 0.8);
+}
+.link {
+    margin-left: 35px;
+	font-size: 23px;
+    color: chocolate;
+}
+#link:hover {
+	background-color: rgba( 255,255,255, 0.8) !important;
+}
+.meh {
+	text-align: center;
+	font-size: 18px;
+}
+
+.modal-open .supreme-container{
+    -webkit-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+}
+#mehmehbox {
+	position: absolute;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.6)
+}
+.modal-content {
+    height: 500px;
+	width: 601px;
+}
+.modal body {
+    position:absolute;
+    box-sizing: border-box;
+	padding: 40px;
+}
+.left-box {
+	background-image: url("../images/Lsky.jpeg");
+    position: absolute;
+	top:0;
+	left:0;
+	box-sizing: border-box;
+	padding: 40px;
+	width: 300px;
+	height: 450px;
+}
+.poop {
+	color:black;
+}
+h1 {
+	margin: 0 0 20px 0;
+	font-weight: 300;
+	font-size: 28px;
+}
+.clicky {
+    font-size: 18px;
+}
+
+.clicky:hover {
+    text-decoration: none;
+    color: #f44336;
+}
+
+input[type="text"], input[type="password"], input[type="number"] {
+	display:block;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+	padding: 4px;
+	width: 220px;
+	height: 32px;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #aaa;
+	font-weight: 400;
+	font-size: 15px;
+	transition: 0.2s ease;
+}
+
+input[type="submit"] {
+	margin-bottom: 28px;
+	width: 120px;
+	height: 32px;
+	background: #f44336;
+	border: none;
+	border-radius: 2px;
+	color: #fff;
+	font-weight: 500;
+	text-transform: uppercase;
+	transition: 0.2s ease;
+	cursor: pointer;
+}
+
+input[type="submit"]:hover, input[type="submit"]:focus {
+	background: #ff5722;
+	transition: 0.2s ease;
+}
+.Line {
+	color: White;
+}
+.right-box {
+	background-image: url("../images/Dsky.jpeg");
+	position: absolute;
+	top: 0;
+	right: 0;
+	box-sizing: border-box;
+	padding: 40px;
+	width: 300px;
+	height: 450px;
+}
+.or {
+	position:absolute;
+	top: 180px;
+	left: 280px;
+	width: 40px;
+	height: 40px;
+	background: orangered;
+    color: white;
+	border-radius: 50%;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+	line-height: 40px;
+	text-align: center;
+
+
+}
+
+</style>
+</body>
+</html>
+

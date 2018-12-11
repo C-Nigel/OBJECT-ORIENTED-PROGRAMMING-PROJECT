@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Ratings</title>
+    <link rel="stylesheet" href="/static/stylesheet.css">
+	<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="a">
+<div>
+<table>
+<tr>
+<td>
+<div class="b">
+ Transporter: John Lim Teck Whye<span id="placeholder"></span>
+  <br>
+Tag: #5996
+<br>
+Company: ICarryYou
+</div>
+</td>
+<td class="f">
+<img src="/static/person1.png">
+</td>
+</tr>
+</table>
+</div>
+<div class="c">
+Please rate our transporter so that we can help to serve you better
+    <form action="/rate" method="post">
+      <span class="starRating">
+        <input id="rating5" type="radio" name="rating" value="5">
+        <label for="rating5">5</label>
+        <input id="rating4" type="radio" name="rating" value="4">
+        <label for="rating4">4</label>
+        <input id="rating3" type="radio" name="rating" value="3">
+        <label for="rating3">3</label>
+        <input id="rating2" type="radio" name="rating" value="2">
+        <label for="rating2">2</label>
+        <input id="rating1" type="radio" name="rating" value="1">
+        <label for="rating1">1</label>
+      </span>
+	  <br>
+
+	</div>
+   <label class="e">Other comments</label>
+<h1><textarea class="g" rows="10" cols="70">
+</textarea></h1>
+	<br>
+		  <h2><input class="e" type="submit" value="Submit"></h2>
+		<br>
+		<br>
+        </form>
+	</div>
+  </body>
+  <style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+* {
+    margin:0;
+    padding:0;
+    font-family: 'Montserrat', sans-serif;
+}
+body {
+    background-image: url("/static/background.png");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+input[type="submit"] {
+margin-bottom: 28px;
+	width: 120px;
+	height: 32px;
+	background: #f44336;
+	border: none;
+	border-radius: 2px;
+	color: #fff;
+	font-weight: 500;
+	text-transform: uppercase;
+	transition: 0.2s ease;
+	cursor: pointer;
+}
+
+input[type="submit"]:hover, input[type="submit"]:focus {
+	background: #ff5722;
+	transition: 0.2s ease;
+}
+.Line {
+	color: White;
+}
+.right-box {
+	background-image: url("../static/images/Dsky.jpeg");
+	position: absolute;
+	top: 0;
+	right: 0;
+	box-sizing: border-box;
+	padding: 40px;
+	width: 300px;
+	height: 450px;
+}
+.or {
+	position:absolute;
+	top: 180px;
+	left: 280px;
+	width: 40px;
+	height: 40px;
+	background: orangered;
+    color: white;
+	border-radius: 50%;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+	line-height: 40px;
+	text-align: center;
+}
+.a {
+  font-size: 40px;
+  }
+.b{
+	margin: 10px;
+	width: 1200px;
+}
+.c{
+  margin: 10px;
+}
+.d{
+  margin: 10px;
+  }
+ .e {
+     margin-left: 10px;
+     color: blue;
+ }
+ .g{
+ padding: 5px;
+     margin-left: 10px;
+ }
+ .f{
+ float: right;
+     margin-top: 10px;
+ }
+</style>
+<script>
+function refresh(){
+	window.open('rating1.html', '_self');
+}
+function onLoad(){
+	username = localStorage.getItem('tempUsername');
+	document.getElementById('placeholder').innerText = username;
+	activeQnList = renderQuestions(qnList);
+	addQnToPage(activeQnList);
+}
+var username = ''; 
+
+</script>
+</body>
+</html>
