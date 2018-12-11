@@ -1,58 +1,21 @@
-from flask import *
-
-
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def Home():
-    return render_template('Home.html')
+def index():
+    return render_template('index.html')
 
 
-@app.route('/Donor', methods = ('GET','POST'))
-def donor():
-        if request.method == 'POST':
-            item = request.form['item']
-            expiry =request.form['expiry']
-            quantity =request.form['quantity']
-            error = None
-            if not item:
-                error = 'Item is required'
-            elif not expiry:
-                error = 'Expiry is required'
-            elif not quantity:
-                error = 'Quantity is required'
-
-            else:
-                donation_list = get_item(item, expiry, quantity)
-                return redirect(url_for('Donor'))
-
-        return render_template('Donor.html')
-
-
-
-
-@app.route('/Donor')
-def Donor1():
-    # logic
-    return render_template('Donor.html')
-
-@app.route('/DonorSubmit')
-def DonorSubmit2():
-    return render_template('DonorSubmit.html')
-
-
-
-
-
-
-
-
-
-
-
+@app.route('/', methods=['POST'])
+def getvalue():
+    transporterid = request.form['transporterid']
+    origin = request.form['origin']
+    destination = request.form['destination']
+    # print(name) will display name in the terminal
+    return render_template('testingGMdirectionServWithAPI.html', id=transporterid, o=origin, d=destination)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

@@ -21,8 +21,8 @@
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
-        margin: 0;
-        padding: 0;
+          padding: 0;
+          margin: 0 180px 0 0;
       }
       #floating-panel {
         position: absolute;
@@ -30,12 +30,11 @@
         left: 25%;
         z-index: 5;
         background-color: #fff;
-        padding: 5px;
         border: 1px solid #999;
         text-align: center;
         font-family: 'Roboto','sans-serif';
         line-height: 30px;
-        padding-left: 10px;
+        padding: 5px 5px 5px 10px;
       }
     </style>
   </head>
@@ -43,9 +42,10 @@
     <div id="floating-panel">
     <b>Start: </b>
     <select id="start">
-      <option
-          value="Blk 127 HDB Ang Mo Kio">{{ o }}
+      <option>
+          {{ o }}
       </option>
+        <!--
       <option value="317 Shunfu Road, Singapore">317 Shunfu Road</option>
       <option value="joplin, mo">Joplin, MO</option>
       <option value="oklahoma city, ok">Oklahoma City</option>
@@ -57,12 +57,14 @@
       <option value="barstow, ca">Barstow</option>
       <option value="san bernardino, ca">San Bernardino</option>
       <option value="los angeles, ca">Los Angeles</option>
+      -->
     </select>
     <b>End: </b>
     <select id="end">
-      <option
-          value="Buangkok Green Blk 988A">{{ d }}
+      <option>
+          {{ d }}
       </option>
+        <!--
       <option value="Blk 812 Yishun , Singapore">Blk 812 Yishun</option>
       <option value="joplin, mo">Joplin, MO</option>
       <option value="oklahoma city, ok">Oklahoma City</option>
@@ -74,9 +76,10 @@
       <option value="barstow, ca">Barstow</option>
       <option value="san bernardino, ca">San Bernardino</option>
       <option value="los angeles, ca">Los Angeles</option>
+      -->
     </select>
-    <b>Press here to generate route</b>
-        <button id="getRoute" >Go!</button>
+    <b>Press to generate route</b>
+        <button id="getRoute" >Generate!</button>
     </div>
     <div id="map"></div>
     <script>
@@ -84,7 +87,7 @@
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
+          zoom: 12,
           center: {lat: 1.349812, lng: 103.865257}
         });
         directionsDisplay.setMap(map);
