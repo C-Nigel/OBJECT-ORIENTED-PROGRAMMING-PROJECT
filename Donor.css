@@ -161,6 +161,68 @@ div.heading {
 }
 
 
+/*  PROGRESSIVE BAR    */
+/* .container{
+    width: 100%;
+} */
+
+.progressivebar li {
+    list-style-type: none;
+    float: left;
+    width: 33.33%;
+    position: relative;
+    text-align: center;
+
+}
+
+.progressivebar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 30px;
+    height:30px;
+    line-height: 30px;
+    border: 1px solid black;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    background-color:white;
+
+
+}
+
+
+
+
+.progressivebar li:after {
+    content: '';
+    position:absolute;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    top: 15px;
+    left: -50%;
+    z-index: -1;
+}
+
+
+
+
+.progressivebar li:first-child:after {
+    content:none;
+}
+
+.progressivebar li.active {
+    color: green;
+}
+
+.progressivebar li.active:before {
+    border-color:green;
+}
+
+.progressivebar li.active + li:after {
+    background-color: green;
+}
 
 
 
@@ -243,7 +305,3 @@ table,th, td {
 
 
 <!-- Transporter -->
-
-
-
-
