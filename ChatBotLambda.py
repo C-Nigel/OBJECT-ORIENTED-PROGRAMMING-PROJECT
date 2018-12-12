@@ -483,6 +483,30 @@ def book_car(intent_request):
         }
     )
 
+def volunteer_jobs(intent_request):
+
+
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
+
+    request = json.dumps({
+        'RequestType': 'Volunteer jobs available',
+    })
+
+    session_attributes['currentRequest'] = request
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': 'we have some roles available: '
+                       '- Donor '
+                       '- Driver (license required) '
+                       'To find out more: question 2 at https://www.FoodForLife.com/faq '
+
+    }
+    )
+
 
 # --- Intents ---
 
