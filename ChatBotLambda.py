@@ -14,9 +14,12 @@ import time
 import os
 import dateutil.parser
 import logging
+import boto3
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
+
+
 
 
 # --- Helpers that build all of the responses ---
@@ -258,75 +261,122 @@ def validate_hotel(slots):
 """ --- Functions that control the bot's behavior --- """
 
 
-def book_hotel(intent_request):
-    """
-    Performs dialog management and fulfillment for booking a hotel.
+def volunteer_qualifications(intent_request):
 
-    Beyond fulfillment, the implementation for this intent demonstrates the following:
-    1) Use of elicitSlot in slot validation and re-prompting
-    2) Use of sessionAttributes to pass information that can be used to guide conversation
-    """
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
 
-    location = try_ex(lambda: intent_request['currentIntent']['slots']['Location'])
-    checkin_date = try_ex(lambda: intent_request['currentIntent']['slots']['CheckInDate'])
-    nights = safe_int(try_ex(lambda: intent_request['currentIntent']['slots']['Nights']))
-
-    room_type = try_ex(lambda: intent_request['currentIntent']['slots']['RoomType'])
-    session_attributes = intent_request['sessionAttributes'] if intent_request['sessionAttributes'] is not None else {}
-
-    # Load confirmation history and track the current reservation.
-    reservation = json.dumps({
-        'ReservationType': 'Hotel',
-        'Location': location,
-        'RoomType': room_type,
-        'CheckInDate': checkin_date,
-        'Nights': nights
+    request = json.dumps({
+        'RequestType': 'Volunteer Qualification',
     })
 
-    session_attributes['currentReservation'] = reservation
-
-    if intent_request['invocationSource'] == 'DialogCodeHook':
-        # Validate any slots which have been specified.  If any are invalid, re-elicit for their value
-        validation_result = validate_hotel(intent_request['currentIntent']['slots'])
-        if not validation_result['isValid']:
-            slots = intent_request['currentIntent']['slots']
-            slots[validation_result['violatedSlot']] = None
-
-            return elicit_slot(
-                session_attributes,
-                intent_request['currentIntent']['name'],
-                slots,
-                validation_result['violatedSlot'],
-                validation_result['message']
-            )
-
-        # Otherwise, let native DM rules determine how to elicit for slots and prompt for confirmation.  Pass price
-        # back in sessionAttributes once it can be calculated; otherwise clear any setting from sessionAttributes.
-        if location and checkin_date and nights and room_type:
-            # The price of the hotel has yet to be confirmed.
-            price = generate_hotel_price(location, nights, room_type)
-            session_attributes['currentReservationPrice'] = price
-        else:
-            try_ex(lambda: session_attributes.pop('currentReservationPrice'))
-
-        session_attributes['currentReservation'] = reservation
-        return delegate(session_attributes, intent_request['currentIntent']['slots'])
-
-    # Booking the hotel.  In a real application, this would likely involve a call to a backend service.
-    logger.debug('bookHotel under={}'.format(reservation))
-
-    try_ex(lambda: session_attributes.pop('currentReservationPrice'))
-    try_ex(lambda: session_attributes.pop('currentReservation'))
-    session_attributes['lastConfirmedReservation'] = reservation
+    session_attributes['currentRequest'] = request
 
     return close(
         session_attributes,
         'Fulfilled',
         {
             'contentType': 'PlainText',
-            'content': 'Thanks, I have placed your reservation.   Please let me know if you would like to book a car '
-                       'rental, or another hotel.'
-        }
+            'content': 'No Minimum qualifications required. '
+                       'People from all ages are welcome to join! '
+                       'To find out more: question 1 at https://www.FoodForLife.com/faq '
+
+    }
+    )
+
+
+
+
+
+
+
+
+
+
+def volunteer_jobs(intent_request):
+
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
+
+    request = json.dumps({
+        'RequestType': 'Volunteer jobs available',
+    })
+
+    session_attributes['currentRequest'] = request
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': 'we have some roles available: '
+                       '- Donor '
+                       '- Driver (license required) '
+                       'To find out more: question 2 at https://www.FoodForLife.com/faq '
+
+    }
+    )
+
+
+
+
+
+
+
+
+
+
+def donator_job(intent_request):
+
+
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
+
+    request = json.dumps({
+        'RequestType': 'Volunteer Qualifications (donator)',
+    })
+
+    session_attributes['currentRequest'] = request
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': 'Donators can donate at any amount* at their own will. '
+                       'A driver will come to your location to pickup after conformation '
+                       "and your donations will be on it's way to its destination. "
+                       'Please visit www.foodforlife.com/donate to check the list of accepted food products.'
+
+    }
+    )
+
+
+
+
+
+
+
+
+
+
+def driver_job(intent_request):
+
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
+
+    request = json.dumps({
+        'RequestType': 'Volunteer Qualifications (driver)',
+    })
+
+    session_attributes['currentRequest'] = request
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': 'Drive with us during your free time! Transporter will ne picking up goods '
+                       "from the donor's location and sending it to it's destination "
+                       'Find out more at www.foodforlife.com/faq '
+
+    }
     )
 
 
@@ -483,33 +533,8 @@ def book_car(intent_request):
         }
     )
 
-def volunteer_jobs(intent_request):
-
-
-    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
-
-    request = json.dumps({
-        'RequestType': 'Volunteer jobs available',
-    })
-
-    session_attributes['currentRequest'] = request
-
-    return close(
-        session_attributes,
-        'Fulfilled',
-        {
-            'contentType': 'PlainText',
-            'content': 'we have some roles available: '
-                       '- Donor '
-                       '- Driver (license required) '
-                       'To find out more: question 2 at https://www.FoodForLife.com/faq '
-
-    }
-    )
-
 
 # --- Intents ---
-
 
 def dispatch(intent_request):
     """
@@ -521,8 +546,14 @@ def dispatch(intent_request):
     intent_name = intent_request['currentIntent']['name']
 
     # Dispatch to your bot's intent handlers
-    if intent_name == 'BookHotel':
-        return book_hotel(intent_request)
+    if intent_name == 'Volunteer_qualification':
+        return volunteer_qualifications(intent_request)
+    elif intent_name == 'Volunteer_jobs':
+        return volunteer_jobs(intent_request)
+    elif intent_name == 'Donator_job':
+        return donator_job(intent_request)
+    elif intent_name == 'Driver_job':
+        return driver_job(intent_request)
     elif intent_name == 'BookCar':
         return book_car(intent_request)
 
@@ -537,8 +568,9 @@ def lambda_handler(event, context):
     Route the incoming request based on intent.
     The JSON body of the request is provided in the event slot.
     """
+
     # By default, treat the user request as coming from the America/New_York time zone.
-    os.environ['TZ'] = 'America/New_York'
+    os.environ['TZ'] = 'Singapore'
     time.tzset()
     logger.debug('event.bot.name={}'.format(event['bot']['name']))
 
