@@ -5,12 +5,48 @@ import logging
 import boto3
 import uuid
 import re
+import datetime
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 
 # Helper that build the response
+
+def elicit_slot(session_attributes, intent_name, slots, slot_to_elicit, message):
+    return {
+        'sessionAttributes': session_attributes,
+        'dialogAction': {
+            'type': 'ElicitSlot',
+            'intentName': intent_name,
+            'slots': slots,
+            'slotToElicit': slot_to_elicit,
+            'message': message
+        }
+    }
+
+
+def confirm_intent(session_attributes, intent_name, slots, message):
+    return {
+        'sessionAttributes': session_attributes,
+        'dialogAction': {
+            'type': 'ConfirmIntent',
+            'intentName': intent_name,
+            'slots': slots,
+            'message': message
+        }
+    }
+
+
+def delegate(session_attributes, slots):
+    return {
+        'sessionAttributes': session_attributes,
+        'dialogAction': {
+            'type': 'Delegate',
+            'slots': slots
+        }
+    }
+
 
 def close(session_attributes, fulfillment_state, message):
     response = {
@@ -39,13 +75,26 @@ def try_ex(func):
         return None
 
 
-def safe_int(n):
+def safe_int(i):
     """
     Safely convert n value to int.
     """
-    if n is not None:
-        return int(n)
-    return n
+    if i is not None:
+        return int(i)
+    return i
+
+def safe_str(i):
+    """
+    Safely convert n value to int.
+    """
+    if i is not None:
+        return str(i)
+    return i
+
+
+def isvalid_role(role):
+    valid_roles = ['donor', 'transporter', 'receiver']
+    return role.lower() in valid_roles
 
 
 def build_validation_result(isvalid, violated_slot, message_content):
@@ -54,36 +103,6 @@ def build_validation_result(isvalid, violated_slot, message_content):
         'violatedSlot': violated_slot,
         'message': {'contentType': 'PlainText', 'content': message_content}
     }
-
-
-def isvalid_country(city):
-    valid_cities = ['afghanistan','albania','algeria','andorra','angola','antigua and barbuda','argentina','armenia',
-                    'aruba','australia','austria','azerbaijan','bahamas','bahrain','bangladesh','barbados','belarus',
-                    'belgium','belize','benin','bhutan','bolivia','bosnia and herzegovina','botswana','brazil','brunei',
-                    'bulgaria','burkina faso','burma','burundi','cambodia','cameroon','canada','cabo verde',
-                    'central african republic','chad','chile','china','colombia','comoros',
-                    'congo, democratic republic of the','congo, republic of the','costa rica',"cote d'ivoire",'croatia',
-                    'cuba','curacao','cyprus','czechia','denmark','djibouti','dominica','dominican republic',
-                    'east timor','ecuador','egypt','el salvador','equatorial guinea','eritrea','estonia','eswatini',
-                    'ethiopia','fiji','finland','france','gabon','gambia','georgia','germany','ghana','greece',
-                    'grenada','guatemala','guinea','guinea-bissau','guyana','haiti','holy see','honduras','hong kong',
-                    'hungary','iceland','india','indonesia','iran','iraq','ireland','israel','italy','jamaica','japan',
-                    'jordan','kazakhstan','kenya','kiribati','north korea','south korea','kosovo','kuwait','kyrgyzstan',
-                    'laos','latvia','lebanon','lesotho','liberia','libya','liechtenstein','lithuania','luxembourg',
-                    'macau','macedonia','madagascar','malawi','malaysia','maldives','mali','malta','marshall islands',
-                    'mauritania','mauritius','mexico','micronesia','moldova','monaco','mongolia','montenegro','morocco',
-                    'mozambique','namibia','nauru','nepal','netherlands','new zealand','nicaragua','niger','nigeria',
-                    'norway','oman','pakist,an''palau','palestinian territories','panama','papua new guinea','paraguay',
-                    'peru','philippines','poland','portugal','qatar','romania','russia','rwanda',
-                    'saint kitts and nevis','saint lucia','saint vincent and the grenadines','samoa','san marino',
-                    'sao tome and principe','saudi arabia','senegal','serbia','seychelles','sierra leone','singapore',
-                    'sint maarten','slovakia','slovenia','solomon islands','somalia','south africa','south sudan',
-                    'spain','sri lanka','sudan','suriname','swaziland','sweden','switzerland','syria','taiwan',
-                    'tajikistan','tanzania','thailand','timor-leste','togo','tonga','trinidad and tobago','tunisia',
-                    'turkey','turkmenistan','tuvalu','uganda','ukraine','united arab emirates','united kingdom',
-                    'uruguay','uzbekistan','vanuatu','venezuela','vietnam','yemen','zambia','zimbabwe'
-]
-    return city.lower() in valid_cities
 
 
 """ --- Functions that control the bot's behavior --- """
@@ -97,9 +116,9 @@ def volunteer_qualifications(intent_request):
     dynamoTable.put_item(
 
         Item={
-            'Request': 'Job qualifications',
-            'Date': time.strftime('%a, %d %b %Y'),
-            'Time': time.strftime('%H:%M:%S')
+            'Request': uuid.uuid4().hex,
+            'Title': 'Job qualifications',
+            'invoked on': str(datetime.datetime.now())
 
         }
 
@@ -123,7 +142,7 @@ def volunteer_qualifications(intent_request):
                        'People from all ages are welcome to join! '
                        'To find out more: question 1 at https://www.FoodForLife.com/faq '
 
-    }
+        }
     )
 
 
@@ -134,9 +153,9 @@ def volunteer_jobs(intent_request):
     dynamoTable.put_item(
 
         Item={
-            'Request': 'Jobs available',
-            'Date': time.strftime('%a, %d %b %Y'),
-            'Time': time.strftime('%H:%M:%S')
+            'Request': uuid.uuid4().hex,
+            'Title': 'Jobs available',
+            'invoked on': str(datetime.datetime.now())
 
         }
 
@@ -171,9 +190,9 @@ def donator_job(intent_request):
     dynamoTable.put_item(
 
         Item={
-            'Request': 'Donor job scope',
-            'Date': time.strftime('%a, %d %b %Y'),
-            'Time': time.strftime('%H:%M:%S')
+            'Request': uuid.uuid4().hex,
+            'Title': 'Donor job scope',
+            'invoked on': str(datetime.datetime.now())
 
         }
 
@@ -210,15 +229,14 @@ def driver_job(intent_request):
     dynamoTable.put_item(
 
         Item={
-            'Request': 'Driver job scope',
-            'Date': time.strftime('%a, %d %b %Y'),
-            'Time': time.strftime('%H:%M:%S')
+            'Request': uuid.uuid4().hex,
+            'Title': 'Driver job scope',
+            'invoked on': str(datetime.datetime.now())
 
         }
 
 
     )
-
 
     session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
 
@@ -237,35 +255,137 @@ def driver_job(intent_request):
                        "from the donor's location and sending it to it's destination "
                        'Find out more at www.foodforlife.com/faq '
 
-    }
+        }
     )
 
 
-def sign_up(slots):
-    username = try_ex(lambda: slots['username'])
-    password = try_ex(lambda: slots['password'])
-    firstname = safe_int(try_ex(lambda: slots['firstname']))
-    lastname = try_ex(lambda: slots['lastname'])
-    email = try_ex(lambda: slots['email'])
-    country_of_residence = try_ex(lambda: slots['residence'])
+def validate_sign_up(intent_request):
+    name = try_ex(lambda: intent_request['name'])
+    password = try_ex(lambda: intent_request['password'])
+    contact_number = safe_int(try_ex(lambda: intent_request['contact_number']))
+    role = try_ex(lambda: intent_request['role'])
+    email = try_ex(lambda: intent_request['email'])
+    company_name = try_ex(lambda: intent_request['company_name'])
 
-# have to add username, password, firstname and lastname checks here
+    if name:
+        pass
 
-    if email:
-        match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email)
-        if match == None:
-            return build_validation_result(False, 'Email', 'Email not recognised. Please retry.')
+    if password:
+        pass
 
-    if country_of_residence and not isvalid_country(country_of_residence):
+    if contact_number:
+        pass
+
+    if role and not isvalid_role(role):
         return build_validation_result(
             False,
-            'Location',
-            'We believe your country {} does not exist.  Please retry with full spelling?'.format(country_of_residence)
+            'role',
+            'Role not available yet. Please retry.'
         )
 
-# have to do confirmation
-# have to write to  DynamoDB after confirmation
-#    return {'isValid': True}
+    if email:
+        pass
+        '''email_verifier = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)@[a-z0-9-]+(\.[a-z0-9-]+)(\.[a-z]{2,4})$', email)
+        if email_verifier == None:
+            return build_validation_result(False, 'Email', 'Email not recognised. Please retry.')'''
+
+    if company_name:
+        pass
+
+    return{'isValid': True}
+
+
+
+def sign_up(intent_request):
+    """
+        Performs dialog management and fulfillment for booking a hotel.
+
+        Beyond fulfillment, the implementation for this intent demonstrates the following:
+        1) Use of elicitSlot in slot validation and re-prompting
+        2) Use of sessionAttributes to pass information that can be used to guide conversation
+        """
+
+    name = try_ex(lambda: intent_request['currentIntent']['slots']['name'])
+    email = try_ex(lambda: intent_request['currentIntent']['slots']['email'])
+    password = try_ex(lambda: intent_request['currentIntent']['slots']['password'])
+    contact_number = safe_int(try_ex(lambda: intent_request['currentIntent']['slots']['contact_number']))
+    company_name = try_ex(lambda: intent_request['currentIntent']['slots']['company_name'])
+    role = try_ex(lambda: intent_request['currentIntent']['slots']['role'])
+
+
+    session_attributes = intent_request['sessionAttributes'] if intent_request['sessionAttributes'] is not None else {}
+
+    # Load confirmation history and track the current reservation.
+    user_info = json.dumps({
+        'RequestType': 'User Sign Up',
+        'name': name,
+        'email': email,
+        'password': password,
+        'contact_number': contact_number,
+        'company_name': company_name,
+        'role': role
+    })
+
+    session_attributes['currentRequest'] = user_info
+
+    if intent_request['invocationSource'] == 'DialogCodeHook':
+        # Validate any slots which have been specified.  If any are invalid, re-elicit for their value
+        validation_result = validate_sign_up(intent_request['currentIntent']['slots'])
+        if not validation_result['isValid']:
+            slots = intent_request['currentIntent']['slots']
+            slots[validation_result['violatedSlot']] = None
+
+            return elicit_slot(
+                session_attributes,
+                intent_request['currentIntent']['name'],
+                slots,
+                validation_result['violatedSlot'],
+                validation_result['message']
+            )
+
+        session_attributes['currentRequest'] = user_info
+        return delegate(session_attributes, intent_request['currentIntent']['slots'])
+
+    # writing the data to dynamodb by giving value to a attribute
+    slots = intent_request['currentIntent']['slots']
+    sign_up_name = slots['name']
+    sign_up_email = slots['email']
+    sign_up_password = slots['password']
+    sign_up_contact_number = slots['contact_number']
+    sign_up_company_name = slots['company_name']
+    sign_up_role = slots['role']
+
+    # writing the attribute to dynamoDB
+    dynamodb = boto3.resource('dynamodb')
+    dynamo_table = dynamodb.Table('user_credentials')
+    dynamo_table.put_item(
+
+        Item={
+            'email': sign_up_email,
+            'password': sign_up_password,
+            'name': sign_up_name,
+            'contact number': sign_up_contact_number,
+            'company name': sign_up_company_name,
+            'role': sign_up_role,
+            'created on': str(datetime.datetime.now())
+
+        }
+    )
+
+    # Booking the hotel.  In a real application, this would likely involve a call to a backend service.
+    logger.debug('signed user up')
+
+    try_ex(lambda: session_attributes.pop('currentRequest'))
+    session_attributes['lastConfirmedReservation'] = user_info
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': 'Sign up successful.you may login in from the top left. '
+        }
+    )
 
 
 # Intents
@@ -289,12 +409,12 @@ def dispatch(intent_request):
         return donator_job(intent_request)
     elif intent_name == 'Driver_job':
         return driver_job(intent_request)
-    elif intent_name == 'Sign_up':
+    elif intent_name == 'Sign_up_user':
         return sign_up(intent_request)
     else:
         dynamodb = boto3.resource('dynamodb')
-        dynamoTable = dynamodb.Table('Test12345')
-        dynamoTable.put_item(
+        dynamo_table = dynamodb.Table('Test12345')
+        dynamo_table.put_item(
 
             Item={
                 'Invalid request': intent_request,
@@ -317,7 +437,7 @@ def lambda_handler(event, context):
     The JSON body of the request is provided in the event slot.
     """
 
-    # By default, treat the user request as coming from the America/New_York time zone.
+    # By default, treat the user request as coming from the GMT(+8:00) zone.
     os.environ['TZ'] = 'Singapore'
     time.tzset()
     logger.debug('event.bot.name={}'.format(event['bot']['name']))
