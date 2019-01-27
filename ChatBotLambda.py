@@ -65,7 +65,6 @@ def try_ex(func):
     """
     Call passed in function in try block. If KeyError is encountered return None.
     This function is intended to be used to safely access dictionary.
-
     Note that this function would have negative impact on performance.
     """
 
@@ -103,6 +102,41 @@ def build_validation_result(isvalid, violated_slot, message_content):
         'violatedSlot': violated_slot,
         'message': {'contentType': 'PlainText', 'content': message_content}
     }
+
+
+class Write:
+
+    def __init__(self, intent_request):
+        # writing the data to dynamodb by giving value to a attribute
+        slots = intent_request['currentIntent']['slots']
+        self.__sign_up_name = slots['name']
+        self.__sign_up_email = slots['email']
+        self.__sign_up_password = slots['password']
+        self.__sign_up_contact_number = slots['contact_number']
+        self.__sign_up_company_name = slots['company_name']
+        self.__sign_up_address = slots['address']
+        self.__sign_up_role = slots['role']
+
+    def get_name(self):
+        return self.__sign_up_name
+
+    def get_email(self):
+        return self.__sign_up_email
+
+    def get_password(self):
+        return self.__sign_up_password
+
+    def get_contact_number(self):
+        return self.__sign_up_contact_number
+
+    def get_company_name(self):
+        return self.__sign_up_company_name
+
+    def get_address(self):
+        return self.__sign_up_address
+
+    def get_role(self):
+        return self.__sign_up_role
 
 
 """ --- Functions that control the bot's behavior --- """
@@ -299,7 +333,6 @@ def validate_sign_up(intent_request):
 def sign_up(intent_request):
     """
         Performs dialog management and fulfillment for booking a hotel.
-
         Beyond fulfillment, the implementation for this intent demonstrates the following:
         1) Use of elicitSlot in slot validation and re-prompting
         2) Use of sessionAttributes to pass information that can be used to guide conversation
@@ -356,18 +389,21 @@ def sign_up(intent_request):
     sign_up_role = slots['role']
 
     # writing the attribute to dynamoDB
+    s1 = Write(intent_request)
     dynamodb = boto3.resource('dynamodb')
     dynamo_table = dynamodb.Table('user_credentials')
     dynamo_table.put_item(
 
         Item={
-            'email': sign_up_email,
-            'password': sign_up_password,
-            'name': sign_up_name,
-            'contact number': sign_up_contact_number,
-            'company name': sign_up_company_name,
-            'role': sign_up_role,
+            'email': s1.get_email(),
+            'password': s1.get_password(),
+            'name': s1.get_name(),
+            'contact number': s1.get_contact_number(),
+            'company name': s1.get_company_name(),
+            'address': s1.get_address(),
+            'role': s1.get_role(),
             'created on': str(datetime.datetime.now())
+
 
         }
     )
@@ -443,5 +479,3 @@ def lambda_handler(event, context):
     logger.debug('event.bot.name={}'.format(event['bot']['name']))
 
     return dispatch(event)
-
-
