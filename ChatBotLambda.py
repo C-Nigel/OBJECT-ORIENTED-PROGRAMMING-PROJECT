@@ -75,33 +75,41 @@ def try_ex(func):
 
 
 def safe_int(i):
-    """
-    Safely convert n value to int.
-    """
+    # Safely convert n value to int.
     if i is not None:
         return int(i)
     return i
 
+
 def safe_str(i):
-    """
-    Safely convert n value to int.
-    """
+
+    # Safely convert n value to int.
+
     if i is not None:
         return str(i)
     return i
 
 
 def isvalid_role(role):
+
+    # roles that currently exist
+
     valid_roles = ['donor', 'transporter', 'receiver']
     return role.lower() in valid_roles
 
 
 def isvalid_category(role):
-    valid_roles = ['password', 'address', 'role', 'contact number', 'name', 'company name', 'email', 'contact']
+
+    # list of category that user is able to change through the chat bot
+
+    valid_roles = ['address', 'contact number', 'name', 'company name', 'contact']
     return role.lower() in valid_roles
 
 
 def build_validation_result(isvalid, violated_slot, message_content):
+
+    # check if the values is valid and show end message if true
+
     return {
         'isValid': isvalid,
         'violatedSlot': violated_slot,
@@ -147,8 +155,258 @@ class Write:
 """ --- Functions that control the bot's behavior --- """
 
 
-def volunteer_qualifications(intent_request):
+def welcome_message(intent_request):
 
+    dynamodb = boto3.resource('dynamodb')
+    dynamoTable = dynamodb.Table('User_requests')
+    dynamoTable.put_item(
+
+        Item={
+            'Request': uuid.uuid4().hex,
+            'Title': 'Welcome message',
+            'invoked on': str(datetime.datetime.now())
+
+        }
+
+
+    )
+
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
+
+    request = json.dumps({
+        'RequestType': 'Welcome message',
+    })
+
+    session_attributes['currentRequest'] = request
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': "Hi there, how may I help you today? you may ask me anything or sign up/update "
+                       "an account through me. "
+
+        }
+    )
+
+
+def sign_in(intent_request):
+
+    dynamodb = boto3.resource('dynamodb')
+    dynamoTable = dynamodb.Table('User_requests')
+    dynamoTable.put_item(
+
+        Item={
+            'Request': uuid.uuid4().hex,
+            'Title': 'Sign in',
+            'invoked on': str(datetime.datetime.now())
+
+        }
+
+
+    )
+
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
+
+    request = json.dumps({
+        'RequestType': 'Sign in',
+    })
+
+    session_attributes['currentRequest'] = request
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': "Sorry, I am unable to help you sign in but you will be "
+                       "able to sign in at the top right corner of the web page. You may sign up for an account here "
+                       "by typing 'sign me up' if you do not have an account yet."
+
+        }
+    )
+
+
+def register_account(intent_request):
+
+    dynamodb = boto3.resource('dynamodb')
+    dynamoTable = dynamodb.Table('User_requests')
+    dynamoTable.put_item(
+
+        Item={
+            'Request': uuid.uuid4().hex,
+            'Title': 'Register account',
+            'invoked on': str(datetime.datetime.now())
+
+        }
+
+
+    )
+
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
+
+    request = json.dumps({
+        'RequestType': 'Register account',
+    })
+
+    session_attributes['currentRequest'] = request
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': "You may sign up for an account on the top right corner "
+                       "or sign up for an account through me by typing 'sign up' here. "
+
+        }
+    )
+
+
+def receiver_users(intent_request):
+
+    dynamodb = boto3.resource('dynamodb')
+    dynamoTable = dynamodb.Table('User_requests')
+    dynamoTable.put_item(
+
+        Item={
+            'Request': uuid.uuid4().hex,
+            'Title': 'Receiver_users',
+            'invoked on': str(datetime.datetime.now())
+
+        }
+
+
+    )
+
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
+
+    request = json.dumps({
+        'RequestType': 'Receiver users',
+    })
+
+    session_attributes['currentRequest'] = request
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': 'Companies/Organisations such as elderly home care receives edible consumables from us.'
+
+        }
+    )
+
+
+def feedback(intent_request):
+
+    dynamodb = boto3.resource('dynamodb')
+    dynamoTable = dynamodb.Table('User_requests')
+    dynamoTable.put_item(
+
+        Item={
+            'Request': uuid.uuid4().hex,
+            'Title': 'feedback',
+            'invoked on': str(datetime.datetime.now())
+
+        }
+
+
+    )
+
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
+
+    request = json.dumps({
+        'RequestType': 'Feedback',
+    })
+
+    session_attributes['currentRequest'] = request
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': 'We would like to hear your feedback! drop as a feedback under our FAQ page '
+                       'and we will reply to you as soon as possible.'
+
+        }
+    )
+
+
+def ending_message(intent_request):
+
+    dynamodb = boto3.resource('dynamodb')
+    dynamoTable = dynamodb.Table('User_requests')
+    dynamoTable.put_item(
+
+        Item={
+            'Request': uuid.uuid4().hex,
+            'Title': 'Ending message',
+            'invoked on': str(datetime.datetime.now())
+
+        }
+
+
+    )
+
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
+
+    request = json.dumps({
+        'RequestType': 'Ending message',
+    })
+
+    session_attributes['currentRequest'] = request
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': "It has been my pleasure helping you out. Do ask me if you require any query!"
+
+        }
+    )
+
+
+def about_us(intent_request):
+
+    dynamodb = boto3.resource('dynamodb')
+    dynamoTable = dynamodb.Table('User_requests')
+    dynamoTable.put_item(
+
+        Item={
+            'Request': uuid.uuid4().hex,
+            'Title': 'About us',
+            'invoked on': str(datetime.datetime.now())
+
+        }
+
+
+    )
+
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
+
+    request = json.dumps({
+        'RequestType': 'About us',
+    })
+
+    session_attributes['currentRequest'] = request
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': 'We are a company that strives to help save our planet by collecting consumable '
+                       'food and redistributing it to the less fortunate.'
+
+        }
+    )
+
+
+def volunteer_qualifications(intent_request):
 
     dynamodb = boto3.resource('dynamodb')
     dynamoTable = dynamodb.Table('User_requests')
@@ -179,7 +437,7 @@ def volunteer_qualifications(intent_request):
             'contentType': 'PlainText',
             'content': 'No Minimum qualifications required. '
                        'People from all ages are welcome to join! '
-                       'To find out more: question 1 at https://www.FoodForLife.com/faq '
+                       'Head over to our FAQ page to find out more. '
 
         }
     )
@@ -213,13 +471,13 @@ def volunteer_jobs(intent_request):
         'Fulfilled',
         {
             'contentType': 'PlainText',
-            'content':  'we have some roles available: '
+            'content':  'Here are some roles currently available: '
                         '- Donor '
                         "- Driver (Drivers' license required) "
-                        '- receiver '
+                        '- Receiver '
                         "sign up for an account by typing 'sign me up' here. "
 
-    }
+        }
     )
 
 
@@ -239,7 +497,6 @@ def donator_job(intent_request):
 
     )
 
-
     session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
 
     request = json.dumps({
@@ -253,12 +510,11 @@ def donator_job(intent_request):
         'Fulfilled',
         {
             'contentType': 'PlainText',
-            'content': 'Donators can donate at any amount* of at their own will. '
-                       'A driver will come to your location to pickup after conformation '
-                       "sign up for an account by typing 'sign me up' here. "
-                       'Please visit www.foodforlife.com/donate to check the list of accepted food products.'
+            'content': 'Donators can donate at any amount* of at their own will and '
+                       'a driver will come to your location to pickup. '
+                       "sign up as a donor by typing 'sign me up' here. "
 
-    }
+        }
     )
 
 
@@ -293,8 +549,7 @@ def driver_job(intent_request):
             'contentType': 'PlainText',
             'content': 'Drive with us during your free time! Transporter will be picking up goods '
                        "from the donor's location and sending it to it's destination. "
-                       "sign up for an account by typing 'sign me up' here. "
-                       'Find out more at www.foodforlife.com/faq '
+                       "sign up as a driver by typing 'sign me up' here. "
 
         }
     )
@@ -331,8 +586,7 @@ def receiver_job(intent_request):
             'contentType': 'PlainText',
             'content': 'Sign up with us as a receiver, give us details and our admins will '
                        "plan and send edible consumables to you. "
-                       "sign up for an account by typing 'sign me up' here. "
-                       'Find out more at www.foodforlife.com/faq '
+                       "sign up as a receiver by typing 'sign me up' here. "
 
         }
     )
@@ -374,14 +628,9 @@ def validate_sign_up(intent_request):
     return{'isValid': True}
 
 
-
 def sign_up(intent_request):
-    """
-        Performs dialog management and fulfillment for booking a hotel.
-        Beyond fulfillment, the implementation for this intent demonstrates the following:
-        1) Use of elicitSlot in slot validation and re-prompting
-        2) Use of sessionAttributes to pass information that can be used to guide conversation
-        """
+
+    # Performs dialog management and fulfillment for creating an account.
 
     name = try_ex(lambda: intent_request['currentIntent']['slots']['name'])
     email = try_ex(lambda: intent_request['currentIntent']['slots']['email'])
@@ -390,10 +639,8 @@ def sign_up(intent_request):
     company_name = try_ex(lambda: intent_request['currentIntent']['slots']['company_name'])
     role = try_ex(lambda: intent_request['currentIntent']['slots']['role'])
 
-
     session_attributes = intent_request['sessionAttributes'] if intent_request['sessionAttributes'] is not None else {}
 
-    # Load confirmation history and track the current reservation.
     user_info = json.dumps({
         'RequestType': 'User Sign Up',
         'person_name': name,
@@ -424,17 +671,6 @@ def sign_up(intent_request):
         session_attributes['currentRequest'] = user_info
         return delegate(session_attributes, intent_request['currentIntent']['slots'])
 
-    # writing the data to dynamodb by giving value to a attribute
-    slots = intent_request['currentIntent']['slots']
-    """
-    sign_up_name = slots['name']
-    sign_up_email = slots['email']
-    sign_up_password = slots['password']
-    sign_up_contact_number = slots['contact_number']
-    sign_up_company_name = slots['company_name']
-    sign_up_role = slots['role']
-    """
-
     # writing the attribute to dynamoDB
     s1 = Write(intent_request)
     dynamodb = boto3.resource('dynamodb')
@@ -455,7 +691,6 @@ def sign_up(intent_request):
         }
     )
 
-    # Booking the hotel.  In a real application, this would likely involve a call to a backend service.
     logger.debug('signed user up')
 
     try_ex(lambda: session_attributes.pop('currentRequest'))
@@ -466,7 +701,7 @@ def sign_up(intent_request):
         'Fulfilled',
         {
             'contentType': 'PlainText',
-            'content': 'Sign up successful.you may login in from the top left. '
+            'content': 'Sign up successful. You may login into your account from the top right of the web page. '
         }
     )
 
@@ -508,7 +743,6 @@ def account_update(intent_request):
 
     session_attributes = intent_request['sessionAttributes'] if intent_request['sessionAttributes'] is not None else {}
 
-    # Load confirmation history and track the current reservation.
     user_updated_info = json.dumps({
         'RequestType': 'User Account Update',
         'email': email,
@@ -539,7 +773,6 @@ def account_update(intent_request):
 
     slots = intent_request['currentIntent']['slots']
     # writing the attribute to dynamoDB
-    data = slots['data']
     dynamodb = boto3.resource('dynamodb')
     dynamo_table = dynamodb.Table('user_credentials')
 
@@ -599,7 +832,6 @@ def account_update(intent_request):
 
         )
 
-    # Booking the hotel.  In a real application, this would likely involve a call to a backend service.
     logger.debug('user account updated')
 
     try_ex(lambda: session_attributes.pop('currentRequest'))
@@ -610,24 +842,21 @@ def account_update(intent_request):
         'Fulfilled',
         {
             'contentType': 'PlainText',
-            'content': 'Account update successful. '
+            'content': 'Update for account {} successful. '.format(slots['email'])
         }
     )
 
 
-# Intents
-
-
 def dispatch(intent_request):
-    """
-    Called when the user specifies an intent for this bot.
-    """
 
-    logger.debug('dispatch userId={}, intentName={}'.format(intent_request['userId'], intent_request['currentIntent']['name']))
+    # Called when the user specifies an intent for this bot.
+
+    logger.debug('dispatch userId={}, intentName={}'.format(intent_request['userId'],
+                                                            intent_request['currentIntent']['name']))
 
     intent_name = intent_request['currentIntent']['name']
 
-    # Dispatch to your bot's intent handlers
+    # Dispatch to the bot's intent handlers
     if intent_name == 'Volunteer_qualification':
         return volunteer_qualifications(intent_request)
     elif intent_name == 'Volunteer_jobs':
@@ -642,6 +871,20 @@ def dispatch(intent_request):
         return sign_up(intent_request)
     elif intent_name == 'Account_update':
         return account_update(intent_request)
+    elif intent_name == 'About_us':
+        return about_us(intent_request)
+    elif intent_name == 'Ending_message':
+        return ending_message(intent_request)
+    elif intent_name == 'Feedback':
+        return feedback(intent_request)
+    elif intent_name == 'Receiver_users':
+        return receiver_users(intent_request)
+    elif intent_name == 'Register_account':
+        return register_account(intent_request)
+    elif intent_name == 'Sign_in':
+        return sign_in(intent_request)
+    elif intent_name == 'Welcome_Message':
+        return welcome_message(intent_request)
 
     raise Exception('Intent with name ' + intent_name + ' not supported')
 
@@ -650,12 +893,7 @@ def dispatch(intent_request):
 
 
 def lambda_handler(event, context):
-    """
-    Route the incoming request based on intent.
-    The JSON body of the request is provided in the event slot.
-    """
 
-    # By default, treat the user request as coming from the GMT(+8:00) zone.
     os.environ['TZ'] = 'Singapore'
     time.tzset()
     logger.debug('event.bot.name={}'.format(event['bot']['name']))
