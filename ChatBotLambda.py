@@ -96,6 +96,11 @@ def isvalid_role(role):
     return role.lower() in valid_roles
 
 
+def isvalid_category(role):
+    valid_roles = ['password', 'address', 'role', 'contact number', 'name', 'company name', 'email', 'contact']
+    return role.lower() in valid_roles
+
+
 def build_validation_result(isvalid, violated_slot, message_content):
     return {
         'isValid': isvalid,
@@ -208,10 +213,11 @@ def volunteer_jobs(intent_request):
         'Fulfilled',
         {
             'contentType': 'PlainText',
-            'content': 'we have some roles available: '
-                       '- Donor '
-                       '- Driver (license required) '
-                       'To find out more: question 2 at https://www.FoodForLife.com/faq '
+            'content':  'we have some roles available: '
+                        '- Donor '
+                        "- Driver (Drivers' license required) "
+                        '- receiver '
+                        "sign up for an account by typing 'sign me up' here. "
 
     }
     )
@@ -247,9 +253,9 @@ def donator_job(intent_request):
         'Fulfilled',
         {
             'contentType': 'PlainText',
-            'content': 'Donators can donate at any amount* at their own will. '
+            'content': 'Donators can donate at any amount* of at their own will. '
                        'A driver will come to your location to pickup after conformation '
-                       "and your donations will be on it's way to its destination. "
+                       "sign up for an account by typing 'sign me up' here. "
                        'Please visit www.foodforlife.com/donate to check the list of accepted food products.'
 
     }
@@ -285,8 +291,47 @@ def driver_job(intent_request):
         'Fulfilled',
         {
             'contentType': 'PlainText',
-            'content': 'Drive with us during your free time! Transporter will ne picking up goods '
-                       "from the donor's location and sending it to it's destination "
+            'content': 'Drive with us during your free time! Transporter will be picking up goods '
+                       "from the donor's location and sending it to it's destination. "
+                       "sign up for an account by typing 'sign me up' here. "
+                       'Find out more at www.foodforlife.com/faq '
+
+        }
+    )
+
+
+def receiver_job(intent_request):
+
+    dynamodb = boto3.resource('dynamodb')
+    dynamoTable = dynamodb.Table('User_requests')
+    dynamoTable.put_item(
+
+        Item={
+            'Request': uuid.uuid4().hex,
+            'Title': 'receiver job scope',
+            'invoked on': str(datetime.datetime.now())
+
+        }
+
+
+    )
+
+    session_attributes = intent_request['sessionAttributes']if intent_request['sessionAttributes'] is not None else {}
+
+    request = json.dumps({
+        'RequestType': 'Volunteer Qualifications (driver)',
+    })
+
+    session_attributes['currentRequest'] = request
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': 'Sign up with us as a receiver, give us details and our admins will '
+                       "plan and send edible consumables to you. "
+                       "sign up for an account by typing 'sign me up' here. "
                        'Find out more at www.foodforlife.com/faq '
 
         }
@@ -351,7 +396,7 @@ def sign_up(intent_request):
     # Load confirmation history and track the current reservation.
     user_info = json.dumps({
         'RequestType': 'User Sign Up',
-        'name': name,
+        'person_name': name,
         'email': email,
         'password': password,
         'contact_number': contact_number,
@@ -381,12 +426,14 @@ def sign_up(intent_request):
 
     # writing the data to dynamodb by giving value to a attribute
     slots = intent_request['currentIntent']['slots']
+    """
     sign_up_name = slots['name']
     sign_up_email = slots['email']
     sign_up_password = slots['password']
     sign_up_contact_number = slots['contact_number']
     sign_up_company_name = slots['company_name']
     sign_up_role = slots['role']
+    """
 
     # writing the attribute to dynamoDB
     s1 = Write(intent_request)
@@ -397,9 +444,9 @@ def sign_up(intent_request):
         Item={
             'email': s1.get_email(),
             'password': s1.get_password(),
-            'name': s1.get_name(),
-            'contact number': s1.get_contact_number(),
-            'company name': s1.get_company_name(),
+            'person_name': s1.get_name(),
+            'contact_number': s1.get_contact_number(),
+            'company_name': s1.get_company_name(),
             'address': s1.get_address(),
             'role': s1.get_role(),
             'created on': str(datetime.datetime.now())
@@ -412,7 +459,7 @@ def sign_up(intent_request):
     logger.debug('signed user up')
 
     try_ex(lambda: session_attributes.pop('currentRequest'))
-    session_attributes['lastConfirmedReservation'] = user_info
+    session_attributes['lastConfirmedRequest'] = user_info
 
     return close(
         session_attributes,
@@ -420,6 +467,150 @@ def sign_up(intent_request):
         {
             'contentType': 'PlainText',
             'content': 'Sign up successful.you may login in from the top left. '
+        }
+    )
+
+
+def validate_account_update(intent_request):
+    password = try_ex(lambda: intent_request['password'])
+    category = try_ex(lambda: intent_request['category'])
+    email = try_ex(lambda: intent_request['email'])
+    data = try_ex(lambda: intent_request['data'])
+
+    if password:
+        pass
+
+    if category and not isvalid_category(category):
+        return build_validation_result(
+            False,
+            'role',
+            'Please enter a valid option to update.'
+        )
+
+    if email:
+        pass
+        '''email_verifier = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)@[a-z0-9-]+(\.[a-z0-9-]+)(\.[a-z]{2,4})$', email)
+        if email_verifier == None:
+            return build_validation_result(False, 'Email', 'Email not recognised. Please retry.')'''
+
+    if data:
+        pass
+
+    return{'isValid': True}
+
+
+def account_update(intent_request):
+
+    email = try_ex(lambda: intent_request['currentIntent']['slots']['email'])
+    password = try_ex(lambda: intent_request['currentIntent']['slots']['password'])
+    category = try_ex(lambda: intent_request['currentIntent']['slots']['password'])
+    data = try_ex(lambda: intent_request['currentIntent']['slots']['data'])
+
+    session_attributes = intent_request['sessionAttributes'] if intent_request['sessionAttributes'] is not None else {}
+
+    # Load confirmation history and track the current reservation.
+    user_updated_info = json.dumps({
+        'RequestType': 'User Account Update',
+        'email': email,
+        'password': password,
+        'category': category,
+        'data': data
+    })
+
+    session_attributes['currentRequest'] = user_updated_info
+
+    if intent_request['invocationSource'] == 'DialogCodeHook':
+        # Validate any slots which have been specified.  If any are invalid, re-elicit for their value
+        validation_result = validate_account_update(intent_request['currentIntent']['slots'])
+        if not validation_result['isValid']:
+            slots = intent_request['currentIntent']['slots']
+            slots[validation_result['violatedSlot']] = None
+
+            return elicit_slot(
+                session_attributes,
+                intent_request['currentIntent']['name'],
+                slots,
+                validation_result['violatedSlot'],
+                validation_result['message']
+            )
+
+        session_attributes['currentRequest'] = user_updated_info
+        return delegate(session_attributes, intent_request['currentIntent']['slots'])
+
+    slots = intent_request['currentIntent']['slots']
+    # writing the attribute to dynamoDB
+    data = slots['data']
+    dynamodb = boto3.resource('dynamodb')
+    dynamo_table = dynamodb.Table('user_credentials')
+
+    if slots['category'] == 'address':
+        dynamo_table.update_item(
+
+            Key={
+                'email': slots['email'],
+                'password': slots['password']
+            },
+            UpdateExpression='SET address = :value1',
+            ExpressionAttributeValues={
+                ':value1': slots['data']
+            }
+
+        )
+
+    elif slots['category'] == 'contact number':
+        dynamo_table.update_item(
+
+            Key={
+                'email': slots['email'],
+                'password': slots['password']
+            },
+            UpdateExpression='SET contact_number = :value1',
+            ExpressionAttributeValues={
+                ':value1': slots['data']
+            }
+
+        )
+
+    elif slots['category'] == 'company name':
+        dynamo_table.update_item(
+
+            Key={
+                'email': slots['email'],
+                'password': slots['password']
+            },
+            UpdateExpression='SET company_name = :value1',
+            ExpressionAttributeValues={
+                ':value1': slots['data']
+            }
+
+        )
+
+    elif slots['category'] == 'name':
+        dynamo_table.update_item(
+
+            Key={
+                'email': slots['email'],
+                'password': slots['password']
+            },
+            UpdateExpression='SET person_name = :value1',
+            ExpressionAttributeValues={
+                ':value1': slots['data']
+            }
+
+        )
+
+    # Booking the hotel.  In a real application, this would likely involve a call to a backend service.
+    logger.debug('user account updated')
+
+    try_ex(lambda: session_attributes.pop('currentRequest'))
+    session_attributes['lastConfirmedRequest'] = user_updated_info
+
+    return close(
+        session_attributes,
+        'Fulfilled',
+        {
+            'contentType': 'PlainText',
+            'content': 'Account update successful. '
         }
     )
 
@@ -445,21 +636,12 @@ def dispatch(intent_request):
         return donator_job(intent_request)
     elif intent_name == 'Driver_job':
         return driver_job(intent_request)
+    elif intent_name == 'Receiver_job':
+        return receiver_job(intent_request)
     elif intent_name == 'Sign_up_user':
         return sign_up(intent_request)
-    else:
-        dynamodb = boto3.resource('dynamodb')
-        dynamo_table = dynamodb.Table('Test12345')
-        dynamo_table.put_item(
-
-            Item={
-                'Invalid request': intent_request,
-                'Date': time.strftime('%a, %d %b %Y'),
-                'Time': time.strftime('%H:%M:%S')
-
-            }
-
-        )
+    elif intent_name == 'Account_update':
+        return account_update(intent_request)
 
     raise Exception('Intent with name ' + intent_name + ' not supported')
 
